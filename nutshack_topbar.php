@@ -7,7 +7,6 @@
     <a href="addnutinfo.php">Add Info</a>
     <a href="upload.php">Upload Image</a>
     <a href="nutshack_users.php">Add User</a>
-    <a href="upload.php">Upload Image</a>
     <a href="nutshack_admin.php">Admin</a>
 <?php
     }else{

@@ -1,0 +1,3 @@
+CREATE TABLE nut_general (id int unsigned not null auto_increment primary key, name tinytext, type tinytext, description mediumtext, image LONGBLOB, nut_info_id int unsigned);
+
+CREATE TABLE nut_info (id int unsigned not null auto_increment primary key, vitamins tinytext, minerals tinytext, protein tinytext, fat tinytext, carb tinytext, calories tinytext);

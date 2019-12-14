@@ -58,15 +58,25 @@ if (!isset($_POST['submit']))
     //clean up and validate data
     $first = trim($first);
     if ( empty($first) ) {
-      try_again("First name cannot be empty.");
+      try_again("First name cannot be empty."); 
     }
+    if( !ctype_alpha($first))
+        {
+            try_again("Only letters are accepted for first name");
+        }
     $last = trim($last);
     if ( empty($last) ) {
       try_again("Last name cannot be empty.");
+      
     }
+    if( !ctype_alpha($last))
+        {
+            try_again("Only letters are accepted for last name");
+        }
     $email = trim($email);
     if ( empty($email) ) {
       try_again("Email cannot be empty.");
+      
     }
     
     //check for duplicate user name

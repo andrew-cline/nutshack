@@ -3,6 +3,7 @@
 require('nutshack_functions.php');
 require('nutshack_values.php');
 html_head("Search Nut");
+session_start();
 require('nutshack_topbar.php');
 
 # Code for your web page follows.
@@ -48,8 +49,12 @@ if (!isset($_POST['submit']))
             $name = $_POST['name'];
             $db = new PDO(DB_PATH, DB_LOGIN, DB_PW);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $db->query("SELECT * from nut_general where name = '$name';");
+            $result = $db->query("SELECT * from nut_general where name = '$name';")->fetch(PDO::FETCH_ASSOC);
+            $test = $result['nut_info_id'];
             print "<table align='left'>";
+            if( isset($test))
+            {
+            $result = $db->query("SELECT * from nut_general where name = '$name';");
             foreach($result as $row) {
                 print "<tr>";
                 print "<td>".$row['name']."</td>";
@@ -75,6 +80,11 @@ if (!isset($_POST['submit']))
             print "</table>";
           // close the database connection
             $db = NULL;
+            }
+            else
+            {
+                print $name." has not had information entered yet.";
+            }
         }
         catch(PDOException $e)
         {

@@ -1,9 +1,13 @@
 <!doctype html>
 <?php
+session_start();
 require('nutshack_functions.php');
 require('nutshack_values.php');
-html_head("Upload Media");
+html_head("Upload Image");
 require('nutshack_topbar.php');
+if (we_are_not_admin()) {
+    exit;
+}
 
 echo "<h2>Processing Media from list..</h2>";
 $name = $_POST['name'];

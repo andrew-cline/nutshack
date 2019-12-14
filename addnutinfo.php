@@ -48,29 +48,29 @@ if (!isset($_POST['submit'])) {
           </select>
         </td>
       </tr>
-      <tr>
+    <tr>
         <td>Vitamins</td>
-        <td align="left"><input type="text" name="vitamins" size="255" maxlength="255"></td>
+        <td align="left"><textarea name="vitamins" rows="2" cols="75"></textarea></td>
+    </tr>
+      <tr>
+      <td>Minerals</td>
+      <td align="left"><textarea name="minerals" rows="2" cols="75"></textarea></td>
       </tr>
       <tr>
-        <td>Minerals</td>
-        <td align="left"><input type="text" name="minerals" size="255" maxlength="255"></td>
+      <td>Protein</td>
+      <td align="left"><textarea name="protein" rows="2" cols="75"></textarea></td>
       </tr>
       <tr>
-        <td>Protein</td>
-        <td align="left"><input type="text" name="protein" size="255" maxlength="255"></td>
+      <td>Fat</td>
+      <td align="left"><textarea name="fat" rows="2" cols="75"></textarea></td>
       </tr>
       <tr>
-        <td>Fat</td>
-        <td align="left"><input type="text" name="fat" size="255" maxlength="255"></td>
+      <td>Carbohydrates</td>
+      <td align="left"><textarea name="carb" rows="2" cols="75"></textarea></td>
       </tr>
       <tr>
-        <td>Carbohydrates</td>
-        <td align="left"><input type="text" name="carb" size="255" maxlength="255"></td>
-      </tr>
-      <tr>
-        <td>Calories</td>
-        <td align="left"><input type="text" name="calories" size="255" maxlength="255"></td>
+      <td>Calories</td>
+      <td align="left"><textarea name="calories" rows="2" cols="75"></textarea></td>
       </tr>
       <tr>
         <td colspan="2" align="right"><input type="submit" name="submit" value="Submit"></td>
@@ -86,8 +86,9 @@ if (!isset($_POST['submit'])) {
   $fat = $_POST['fat'];
   $carb = $_POST['carb'];
   $calories = $_POST['calories'];
-
-  //clean up and validate data
+$errors = validate_info($vitamins, $minerals, $protein, $fat, $carb, $calories);
+if(empty($errors))
+{
   try {
     $db = new PDO(DB_PATH, DB_LOGIN, DB_PW);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -137,5 +138,21 @@ if (!isset($_POST['submit'])) {
     $db = NULL;
   }
 }
-require('nutshack_footer.php');
+else
+    {
+        echo "Errors found in info entry:<br/>";
+        echo "Name: $name<br/>";
+        echo "Vitamins: $vitamins<br/>";
+        echo "Minerals: $minerals<br/>";
+        echo "Protein: $protein<br/>";
+        echo "Fat: $fat<br/>";
+        echo "Carbohydrates: $carb<br/>";
+        echo "Calories: $calories<br/>";
+        foreach($errors as $error)
+        {
+            echo $error."<br/>";
+        }
+
+    }
+}
 ?>

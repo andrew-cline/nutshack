@@ -72,6 +72,7 @@ if (!isset($_POST['submit']))
   $name = $_POST['name'];
   $type = $_POST['type'];
   $description = $_POST['description'];
+  $image = strtolower($_POST['name']);
   
 
   //clean up and validate data
@@ -116,7 +117,7 @@ if (!isset($_POST['submit']))
     }
     else
     {
-        echo "Errors found in media entry:<br/>";
+        echo "Errors found in nut entry:<br/>";
         echo "Name: $name<br/>";
         echo "Type: $type<br/>";
         echo "Description: $description<br/>";
